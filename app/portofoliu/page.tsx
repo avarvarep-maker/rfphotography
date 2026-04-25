@@ -15,21 +15,29 @@ const categories = [
   { id: "video", label: "Video" },
 ];
 
-const portfolioItems = [
-  { id: 1, category: "nunta", title: "Nuntă — 2024", year: "2024" },
-  { id: 2, category: "nunta", title: "Nuntă — 2023", year: "2023" },
-  { id: 3, category: "botez", title: "Botez — 2024", year: "2024" },
-  { id: 4, category: "logodna", title: "Logodnă — 2024", year: "2024" },
-  { id: 5, category: "familie", title: "Familie — 2023", year: "2023" },
-  { id: 6, category: "nunta", title: "Nuntă — 2023", year: "2023" },
-  { id: 7, category: "majorat", title: "Majorat — 2024", year: "2024" },
-  { id: 8, category: "video", title: "Filmare Nuntă — 2024", year: "2024" },
-  { id: 9, category: "botez", title: "Botez — 2023", year: "2023" },
-  { id: 10, category: "logodna", title: "Logodnă — 2023", year: "2023" },
-  { id: 11, category: "familie", title: "Maternitate — 2024", year: "2024" },
-  { id: 12, category: "video", title: "Filmare Botez — 2024", year: "2024" },
-];
+const categoryGradients: Record<string, string> = {
+  nunta: "linear-gradient(160deg, #1c1410 0%, #111111 100%)",
+  botez: "linear-gradient(160deg, #0e1418 0%, #111111 100%)",
+  logodna: "linear-gradient(160deg, #181018 0%, #111111 100%)",
+  familie: "linear-gradient(160deg, #101814 0%, #111111 100%)",
+  majorat: "linear-gradient(160deg, #18180e 0%, #111111 100%)",
+  video: "linear-gradient(160deg, #141418 0%, #111111 100%)",
+};
 
+const portfolioItems = [
+  { id: 1, category: "nunta", title: "Nuntă", year: "2024" },
+  { id: 2, category: "nunta", title: "Nuntă", year: "2023" },
+  { id: 3, category: "botez", title: "Botez", year: "2024" },
+  { id: 4, category: "logodna", title: "Logodnă", year: "2024" },
+  { id: 5, category: "familie", title: "Familie", year: "2023" },
+  { id: 6, category: "nunta", title: "Nuntă", year: "2023" },
+  { id: 7, category: "majorat", title: "Majorat", year: "2024" },
+  { id: 8, category: "video", title: "Filmare Nuntă", year: "2024" },
+  { id: 9, category: "botez", title: "Botez", year: "2023" },
+  { id: 10, category: "logodna", title: "Logodnă", year: "2023" },
+  { id: 11, category: "familie", title: "Maternitate", year: "2024" },
+  { id: 12, category: "video", title: "Filmare Botez", year: "2024" },
+];
 
 export default function PortofoliuPage() {
   const [active, setActive] = useState("toate");
@@ -43,9 +51,9 @@ export default function PortofoliuPage() {
     <>
       {/* Header */}
       <section
-        className="pt-36 pb-16 px-6 text-center"
+        className="pt-40 pb-20 px-6 text-center"
         style={{
-          background: "linear-gradient(180deg, #1a1408 0%, var(--bg) 100%)",
+          background: "linear-gradient(180deg, #1c1508 0%, var(--bg) 100%)",
           borderBottom: "1px solid var(--border)",
         }}
       >
@@ -54,9 +62,7 @@ export default function PortofoliuPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-xs tracking-[0.5em] uppercase mb-4" style={{ color: "var(--gold)" }}>
-            Lucrările noastre
-          </p>
+          <span className="section-label">Lucrările noastre</span>
           <h1
             className="text-5xl md:text-7xl"
             style={{ fontFamily: "var(--font-display)", fontWeight: 300, color: "var(--text)" }}
@@ -66,31 +72,38 @@ export default function PortofoliuPage() {
         </motion.div>
       </section>
 
-      {/* Filter tabs */}
-      <section className="py-8 px-6 sticky top-20 z-30" style={{ backgroundColor: "rgba(8,8,8,0.95)", backdropFilter: "blur(12px)", borderBottom: "1px solid var(--border)" }}>
+      {/* Filter tabs — sticky */}
+      <div
+        className="sticky top-20 z-30 py-5 px-6"
+        style={{
+          backgroundColor: "rgba(8,8,8,0.97)",
+          backdropFilter: "blur(16px)",
+          borderBottom: "1px solid var(--border)",
+        }}
+      >
         <div className="max-w-7xl mx-auto flex flex-wrap gap-2 justify-center">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActive(cat.id)}
-              className="px-5 py-2 text-xs tracking-[0.2em] uppercase transition-all duration-200"
+              className="px-5 py-2 text-[10px] tracking-[0.25em] uppercase transition-all duration-200"
               style={{
                 backgroundColor: active === cat.id ? "var(--gold)" : "transparent",
                 color: active === cat.id ? "var(--bg)" : "var(--muted)",
                 border: "1px solid",
                 borderColor: active === cat.id ? "var(--gold)" : "var(--border)",
                 fontWeight: active === cat.id ? 600 : 400,
-                minHeight: "44px",
+                minHeight: "40px",
               }}
             >
               {cat.label}
             </button>
           ))}
         </div>
-      </section>
+      </div>
 
       {/* Grid */}
-      <section className="py-16 px-6">
+      <section className="py-14 px-6">
         <div className="max-w-7xl mx-auto">
           <AnimatePresence mode="wait">
             <motion.div
@@ -98,8 +111,8 @@ export default function PortofoliuPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+              transition={{ duration: 0.25 }}
+              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
             >
               {filtered.map((item, i) => (
                 <motion.div
@@ -108,37 +121,42 @@ export default function PortofoliuPage() {
                   animate="visible"
                   variants={fadeUp}
                   custom={i}
-                  className="group relative aspect-[3/4] overflow-hidden cursor-pointer"
-                  style={{ backgroundColor: "var(--bg3)", border: "1px solid var(--border)" }}
+                  className="portfolio-card group relative aspect-[3/4] overflow-hidden cursor-pointer"
+                  style={{ border: "1px solid var(--border)" }}
                 >
-                  {/* Placeholder for photo */}
+                  {/* Deterministic category gradient */}
                   <div
-                    className="absolute inset-0 flex items-center justify-center transition-transform duration-500 group-hover:scale-105"
-                    style={{
-                      background: `linear-gradient(135deg, #${Math.floor(Math.random() * 0x333333 + 0x111111).toString(16).padStart(6, "0")} 0%, var(--bg2) 100%)`,
-                    }}
+                    className="inner absolute inset-0 flex items-center justify-center"
+                    style={{ background: categoryGradients[item.category] ?? "var(--bg3)" }}
                   >
-                    <span
-                      className="text-4xl opacity-10"
-                      style={{ fontFamily: "var(--font-display)", color: "var(--gold)" }}
-                    >
-                      RF
-                    </span>
+                    {/* Cinematic frame lines */}
+                    <div className="absolute inset-4 pointer-events-none" style={{ border: "1px solid rgba(201,168,76,0.08)" }} />
+                    <div className="text-center">
+                      <p
+                        className="text-3xl"
+                        style={{ fontFamily: "var(--font-display)", color: "var(--gold)", opacity: 0.12, fontWeight: 600 }}
+                      >
+                        RF
+                      </p>
+                    </div>
                   </div>
 
-                  {/* Overlay */}
+                  {/* Hover overlay */}
                   <div
-                    className="absolute inset-0 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    style={{ background: "linear-gradient(transparent, rgba(0,0,0,0.8))" }}
+                    className="overlay absolute inset-0 flex flex-col justify-end p-5"
+                    style={{ background: "linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%, transparent 100%)" }}
                   >
-                    <p className="text-xs tracking-widest uppercase mb-1" style={{ color: "var(--gold)" }}>
+                    <span className="text-[9px] tracking-[0.4em] uppercase mb-1" style={{ color: "var(--gold)" }}>
                       {item.year}
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <p className="text-sm" style={{ color: "var(--text)", fontFamily: "var(--font-display)" }}>
+                    </span>
+                    <div className="flex items-end justify-between">
+                      <p
+                        className="text-base leading-tight"
+                        style={{ fontFamily: "var(--font-display)", color: "var(--text)", fontWeight: 400 }}
+                      >
                         {item.title}
                       </p>
-                      <ArrowUpRight size={16} style={{ color: "var(--gold)" }} />
+                      <ArrowUpRight size={16} style={{ color: "var(--gold)", flexShrink: 0 }} />
                     </div>
                   </div>
                 </motion.div>
@@ -147,18 +165,11 @@ export default function PortofoliuPage() {
           </AnimatePresence>
 
           {filtered.length === 0 && (
-            <div className="text-center py-20">
-              <p style={{ color: "var(--muted)" }}>Nu există lucrări în această categorie.</p>
+            <div className="text-center py-24">
+              <p className="text-sm" style={{ color: "var(--muted)" }}>Nu există lucrări în această categorie.</p>
             </div>
           )}
         </div>
-      </section>
-
-      {/* Note */}
-      <section className="pb-16 px-6 text-center">
-        <p className="text-xs" style={{ color: "var(--muted)" }}>
-          Imaginile din portofoliu vor fi adăugate de client. Galeria afișată este un placeholder structural.
-        </p>
       </section>
     </>
   );

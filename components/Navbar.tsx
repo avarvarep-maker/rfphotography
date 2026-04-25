@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -25,9 +25,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
+  useEffect(() => { setMenuOpen(false); }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -39,29 +37,35 @@ export default function Navbar() {
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
         style={{
-          backgroundColor: scrolled ? "rgba(8,8,8,0.96)" : "transparent",
+          backgroundColor: scrolled ? "rgba(8,8,8,0.97)" : "transparent",
           borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
-          backdropFilter: scrolled ? "blur(12px)" : "none",
+          backdropFilter: scrolled ? "blur(16px)" : "none",
         }}
       >
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           {/* Left links */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-10">
             {navLinks.slice(0, 2).map((link) => (
-              <NavLink key={link.href} {...link} active={pathname === link.href} />
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`nav-link ${pathname === link.href ? "active" : ""}`}
+              >
+                {link.label}
+              </Link>
             ))}
           </nav>
 
-          {/* Logo center */}
+          {/* Logo */}
           <Link href="/" className="flex flex-col items-center group">
             <span
-              className="text-2xl tracking-[0.3em] uppercase transition-colors duration-300"
-              style={{ fontFamily: "var(--font-display)", color: "var(--gold)", fontWeight: 600 }}
+              className="text-2xl tracking-[0.35em] uppercase"
+              style={{ fontFamily: "var(--font-display)", color: "var(--gold)", fontWeight: 600, lineHeight: 1 }}
             >
               RF
             </span>
             <span
-              className="text-[10px] tracking-[0.5em] uppercase"
+              className="text-[9px] tracking-[0.55em] uppercase mt-0.5"
               style={{ color: "var(--muted)" }}
             >
               Photography
@@ -69,9 +73,15 @@ export default function Navbar() {
           </Link>
 
           {/* Right links */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-10">
             {navLinks.slice(2).map((link) => (
-              <NavLink key={link.href} {...link} active={pathname === link.href} />
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`nav-link ${pathname === link.href ? "active" : ""}`}
+              >
+                {link.label}
+              </Link>
             ))}
           </nav>
 
@@ -82,69 +92,55 @@ export default function Navbar() {
             aria-label="Meniu"
             style={{ color: "var(--text)" }}
           >
-            {menuOpen ? <X size={24} /> : <List size={24} />}
+            {menuOpen ? <X size={22} weight="light" /> : <List size={22} weight="light" />}
           </button>
         </div>
       </header>
 
-      {/* Mobile menu */}
+      {/* Mobile fullscreen menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
             className="fixed inset-0 z-40 flex flex-col pt-20"
             style={{ backgroundColor: "var(--bg)" }}
           >
-            <nav className="flex flex-col items-center justify-center flex-1 gap-8">
+            {/* Top gold line */}
+            <div className="h-px w-full" style={{ background: "linear-gradient(90deg, transparent, var(--gold), transparent)" }} />
+
+            <nav className="flex flex-col items-center justify-center flex-1 gap-10">
               {navLinks.map((link, i) => (
                 <motion.div
                   key={link.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.07 }}
+                  initial={{ opacity: 0, x: -24 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.06, duration: 0.4 }}
                 >
                   <Link
                     href={link.href}
-                    className="text-3xl tracking-widest uppercase transition-colors duration-200"
-                    style={{
-                      fontFamily: "var(--font-display)",
-                      color: pathname === link.href ? "var(--gold)" : "var(--text)",
-                      fontWeight: 500,
-                    }}
+                    className={`mobile-nav-link ${pathname === link.href ? "active" : ""}`}
+                    style={{ fontFamily: "var(--font-display)", fontWeight: 400 }}
                   >
                     {link.label}
                   </Link>
                 </motion.div>
               ))}
             </nav>
-            <div className="pb-8 text-center" style={{ color: "var(--muted)", fontSize: "12px", letterSpacing: "0.2em" }}>
-              Constanța, România
+
+            <div
+              className="pb-10 text-center flex flex-col items-center gap-2"
+              style={{ borderTop: "1px solid var(--border)" }}
+            >
+              <span className="pt-8 text-[10px] tracking-[0.4em] uppercase" style={{ color: "var(--muted)" }}>
+                Constanța · România
+              </span>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
     </>
-  );
-}
-
-function NavLink({ href, label, active }: { href: string; label: string; active: boolean }) {
-  return (
-    <Link
-      href={href}
-      className="relative text-xs tracking-[0.2em] uppercase transition-colors duration-200 group"
-      style={{ color: active ? "var(--gold)" : "var(--muted)" }}
-    >
-      {label}
-      <span
-        className="absolute -bottom-1 left-0 h-px transition-all duration-300"
-        style={{
-          backgroundColor: "var(--gold)",
-          width: active ? "100%" : "0%",
-        }}
-      />
-    </Link>
   );
 }
