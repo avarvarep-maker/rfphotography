@@ -16,12 +16,12 @@ const categories = [
 ];
 
 const categoryGradients: Record<string, string> = {
-  nunta: "linear-gradient(160deg, #1c1410 0%, #111111 100%)",
-  botez: "linear-gradient(160deg, #0e1418 0%, #111111 100%)",
-  logodna: "linear-gradient(160deg, #181018 0%, #111111 100%)",
-  familie: "linear-gradient(160deg, #101814 0%, #111111 100%)",
-  majorat: "linear-gradient(160deg, #18180e 0%, #111111 100%)",
-  video: "linear-gradient(160deg, #141418 0%, #111111 100%)",
+  nunta:   "linear-gradient(150deg, #2a1e0e 0%, #150f07 100%)",
+  botez:   "linear-gradient(150deg, #0d1a22 0%, #070e14 100%)",
+  logodna: "linear-gradient(150deg, #221428 0%, #120a16 100%)",
+  familie: "linear-gradient(150deg, #0e2018 0%, #07110d 100%)",
+  majorat: "linear-gradient(150deg, #221c0a 0%, #120f05 100%)",
+  video:   "linear-gradient(150deg, #141430 0%, #0a0a1a 100%)",
 };
 
 const portfolioItems = [

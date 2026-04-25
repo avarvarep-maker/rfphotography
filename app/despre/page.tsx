@@ -99,19 +99,17 @@ export default function DesprePage() {
           >
             {/* Ramona card */}
             <div
-              className="aspect-[3/4] flex flex-col justify-end p-6"
-              style={{ backgroundColor: "var(--bg3)", border: "1px solid var(--border)" }}
+              className="aspect-[3/4] flex flex-col justify-end p-6 relative overflow-hidden"
+              style={{ backgroundColor: "var(--bg3)", border: "1px solid var(--border)", borderTop: "2px solid var(--gold)" }}
             >
-              <div
-                className="w-8 h-px mb-4"
-                style={{ backgroundColor: "var(--gold)" }}
-              />
-              <p className="text-xs tracking-widest uppercase mb-1" style={{ color: "var(--gold)" }}>
+              <div className="absolute top-3 left-3 w-5 h-5" style={{ borderTop: "1px solid var(--gold)", borderLeft: "1px solid var(--gold)" }} />
+              <div className="absolute top-3 right-3 w-5 h-5" style={{ borderTop: "1px solid var(--gold)", borderRight: "1px solid var(--gold)" }} />
+              <p className="text-[9px] tracking-[0.4em] uppercase mb-2" style={{ color: "var(--gold)" }}>
                 Fotograf
               </p>
               <p
-                className="text-xl"
-                style={{ fontFamily: "var(--font-display)", color: "var(--text)" }}
+                className="text-2xl"
+                style={{ fontFamily: "var(--font-display)", color: "var(--text)", fontWeight: 400 }}
               >
                 Ramona
               </p>
@@ -119,19 +117,17 @@ export default function DesprePage() {
 
             {/* Florin card — offset */}
             <div
-              className="aspect-[3/4] flex flex-col justify-end p-6 mt-8"
-              style={{ backgroundColor: "var(--bg3)", border: "1px solid var(--border)" }}
+              className="aspect-[3/4] flex flex-col justify-end p-6 mt-8 relative overflow-hidden"
+              style={{ backgroundColor: "var(--bg3)", border: "1px solid var(--border)", borderTop: "2px solid var(--gold)" }}
             >
-              <div
-                className="w-8 h-px mb-4"
-                style={{ backgroundColor: "var(--gold)" }}
-              />
-              <p className="text-xs tracking-widest uppercase mb-1" style={{ color: "var(--gold)" }}>
+              <div className="absolute top-3 left-3 w-5 h-5" style={{ borderTop: "1px solid var(--gold)", borderLeft: "1px solid var(--gold)" }} />
+              <div className="absolute top-3 right-3 w-5 h-5" style={{ borderTop: "1px solid var(--gold)", borderRight: "1px solid var(--gold)" }} />
+              <p className="text-[9px] tracking-[0.4em] uppercase mb-2" style={{ color: "var(--gold)" }}>
                 Fotograf
               </p>
               <p
-                className="text-xl"
-                style={{ fontFamily: "var(--font-display)", color: "var(--text)" }}
+                className="text-2xl"
+                style={{ fontFamily: "var(--font-display)", color: "var(--text)", fontWeight: 400 }}
               >
                 Florin
               </p>

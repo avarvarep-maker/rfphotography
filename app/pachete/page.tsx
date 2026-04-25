@@ -101,9 +101,7 @@ export default function PachetePage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-xs tracking-[0.5em] uppercase mb-4" style={{ color: "var(--gold)" }}>
-            Ofertele noastre
-          </p>
+          <span className="section-label">Ofertele noastre</span>
           <h1
             className="text-5xl md:text-7xl mb-6"
             style={{ fontFamily: "var(--font-display)", fontWeight: 300, color: "var(--text)" }}
@@ -136,7 +134,7 @@ export default function PachetePage() {
               </h2>
             </motion.div>
 
-            <div className={`grid grid-cols-1 ${section.items.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2 max-w-3xl"} gap-6`}>
+            <div className={`package-grid grid grid-cols-1 ${section.items.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2 max-w-3xl"} gap-6`}>
               {section.items.map((pkg, i) => (
                 <motion.div
                   key={i}
@@ -145,15 +143,15 @@ export default function PachetePage() {
                   viewport={{ once: true }}
                   variants={fadeUp}
                   custom={i + 1}
-                  className="relative flex flex-col p-8"
+                  className="package-card relative p-8"
                   style={{
                     backgroundColor: pkg.featured ? "var(--gold)" : "var(--bg3)",
-                    border: `1px solid ${pkg.featured ? "var(--gold)" : "var(--border)"}`,
+                    border: `1px solid ${pkg.featured ? "var(--gold-light)" : "var(--border)"}`,
                   }}
                 >
                   {pkg.featured && (
                     <span
-                      className="absolute top-0 right-6 -translate-y-1/2 text-[10px] tracking-widest uppercase px-3 py-1"
+                      className="absolute top-0 right-6 -translate-y-1/2 text-[9px] tracking-[0.3em] uppercase px-3 py-1"
                       style={{ backgroundColor: "var(--bg)", color: "var(--gold)", border: "1px solid var(--gold)" }}
                     >
                       Popular
@@ -164,14 +162,15 @@ export default function PachetePage() {
                     className="text-2xl mb-1"
                     style={{
                       fontFamily: "var(--font-display)",
-                      color: pkg.featured ? "var(--bg)" : "var(--text)",
+                      color: pkg.featured ? "#0a0a0a" : "var(--text)",
+                      fontWeight: 600,
                     }}
                   >
                     {pkg.name}
                   </h3>
                   <p
                     className="text-xs tracking-wide mb-6"
-                    style={{ color: pkg.featured ? "rgba(8,8,8,0.6)" : "var(--muted)" }}
+                    style={{ color: pkg.featured ? "rgba(0,0,0,0.55)" : "var(--muted)" }}
                   >
                     {pkg.desc}
                   </p>
@@ -180,11 +179,11 @@ export default function PachetePage() {
                     {pkg.features.map((feature, fi) => (
                       <li key={fi} className="flex items-start gap-3 text-sm">
                         <Check
-                          size={16}
+                          size={15}
                           className="mt-0.5 flex-shrink-0"
-                          style={{ color: pkg.featured ? "var(--bg)" : "var(--gold)" }}
+                          style={{ color: pkg.featured ? "#0a0a0a" : "var(--gold)" }}
                         />
-                        <span style={{ color: pkg.featured ? "var(--bg)" : "var(--muted)" }}>
+                        <span style={{ color: pkg.featured ? "#1a1a1a" : "var(--muted)" }}>
                           {feature}
                         </span>
                       </li>
@@ -193,11 +192,11 @@ export default function PachetePage() {
 
                   <Link
                     href="/contact"
-                    className="inline-flex items-center justify-center gap-2 py-3 text-xs tracking-widest uppercase transition-all duration-300"
+                    className={pkg.featured ? "btn-outline-dark inline-flex items-center justify-center gap-2 py-3 text-xs tracking-widest uppercase" : "btn-outline inline-flex items-center justify-center gap-2 py-3 text-xs tracking-widest uppercase"}
                     style={{
-                      backgroundColor: pkg.featured ? "var(--bg)" : "transparent",
+                      backgroundColor: pkg.featured ? "#0a0a0a" : "transparent",
                       color: pkg.featured ? "var(--gold)" : "var(--gold)",
-                      border: `1px solid ${pkg.featured ? "var(--bg)" : "var(--gold)"}`,
+                      border: `1px solid ${pkg.featured ? "#0a0a0a" : "var(--gold)"}`,
                       minHeight: "44px",
                     }}
                   >
